@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "ee7cb776-8e89-4b95-8112-4ff1de1f97b2",
+		"name": "CatedraWM-1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33696552"
+	},
+	"item": [
+		{
+			"name": "CREATE EBOOK",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"TEST aaa\",\r\n  \"author\": \"TEST AUTHOR\",\r\n  \"genre\": \"TEST GENRE\",\r\n  \"format\": \"TEST FORMAT\",\r\n  \"price\": 3000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ebook",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL EBOOKS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ebook?genre=&author&format",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": ""
+						},
+						{
+							"key": "author",
+							"value": null
+						},
+						{
+							"key": "format",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE EBOOK BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"string\",\r\n  \"author\": \"string\",\r\n  \"genre\": \"string\",\r\n  \"format\": \"string\",\r\n  \"price\": 5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ebook/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE EBOOK BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ebook/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CHANGE AVAILABILITY",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/ebook/1/change-availability",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook",
+						"1",
+						"change-availability"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INCREMENT STOCK",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stock\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ebook/1/increment-stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook",
+						"1",
+						"increment-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PURCHASE EBOOK",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"price\": 5000,\r\n  \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ebook/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ebook",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

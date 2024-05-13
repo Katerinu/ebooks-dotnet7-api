@@ -44,22 +44,31 @@ async Task<IResult> CreateEBookAsync([FromBody] CreateBookDTO inputBook ,DataCon
 {
     var newbook = await context.EBooks.FirstOrDefaultAsync(x => x.Author == inputBook.Author && x.Title == inputBook.Title);
 
-
-    if(newbook is null)
+    if(newbook is not null)
     {
         return Results.Conflict("Existe un libro con el mismo autor y titulo");
     }
 
-    newbook.Stock = 0;
-    newbook.IsAvailable = false;
-    context.Add(newbook);
+    var ebook = new EBook
+    {
+        Title = inputBook.Title,
+        Author = inputBook.Author,
+        Genre = inputBook.Genre,
+        Format = inputBook.Format,
+        IsAvailable = false,
+        Stock = 0,
+        Price = inputBook.Price
+
+    };
+
+    context.Add(ebook);
     await context.SaveChangesAsync();
-    return Results.Ok(newbook);
+    return Results.Ok(ebook);
 }
 
 async Task<IResult> GetAllEbooksAsync([FromQuery] string? genre, [FromQuery] string? author, [FromQuery] string? format, DataContext context)
 {
-    if(genre == null || author == null ||  format == null)
+    if(genre == "" || author == "" ||  format == "")
     {
         return Results.Ok(context.EBooks.ToArrayAsync());
     }
@@ -112,7 +121,7 @@ async Task<IResult> ChangeAvailabilitysync(int id, DataContext context)
     return Results.Ok(ebook);
 }
 
-async Task<IResult> IncrementStockAsync(int id, [FromBody] int ammount, DataContext context)
+async Task<IResult> IncrementStockAsync(int id, [FromBody] StockDTO stock, DataContext context)
 {
     var ebook = await context.EBooks.FindAsync(id);
     if(ebook is null)
@@ -120,7 +129,7 @@ async Task<IResult> IncrementStockAsync(int id, [FromBody] int ammount, DataCont
         return Results.NotFound("No se encontro la id");
     }
 
-    ebook.Stock = ebook.Stock + ammount;
+    ebook.Stock = ebook.Stock + stock.Stock;
     await context.SaveChangesAsync();
     return Results.Ok(ebook);
 }
